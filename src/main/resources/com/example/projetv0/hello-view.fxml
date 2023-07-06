@@ -78,7 +78,7 @@
     <center>
         <Pane fx:id="centerPane" BorderPane.alignment="CENTER">
             <children>
-                <Label fx:id="topLbl" layoutX="32.0" layoutY="26.0" text="TOPING THE CHARTS RIGHT NOW!" textFill="WHITE">
+                <Label fx:id="topLbl" layoutX="32.0" layoutY="26.0" prefHeight="44.0" prefWidth="886.0" text="TOPING THE CHARTS RIGHT NOW!" textFill="WHITE">
                     <font>
                         <Font name="Dubai Medium" size="24.0" />
                     </font>
