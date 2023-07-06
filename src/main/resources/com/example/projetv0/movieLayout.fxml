@@ -16,27 +16,27 @@
       </Pane>
       <Pane prefHeight="350.0" prefWidth="1006.0">
          <children>
-            <Label fx:id="movieNameLbl" layoutX="18.0" text="Movie name" textFill="WHITE">
+            <Label fx:id="movieNameLbl" layoutX="15.0" layoutY="38.0" text="Movie name" textFill="WHITE">
                <font>
                   <Font name="Dubai Medium" size="25.0" />
                </font>
             </Label>
-            <Text fx:id="SynopsisTxt" fill="WHITE" layoutX="18.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Synopsis" wrappingWidth="850.1770858764648">
+            <Text fx:id="SynopsisTxt" fill="WHITE" layoutX="15.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Synopsis" wrappingWidth="850.1770858764648">
                <font>
                   <Font name="Dubai Light" size="17.0" />
                </font>
             </Text>
-            <Text fx:id="GenreTxt" fill="WHITE" layoutX="17.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre:" wrappingWidth="269.37694549560547">
+            <Text fx:id="GenreTxt" fill="WHITE" layoutX="15.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre:" wrappingWidth="269.37694549560547">
                <font>
                   <Font name="Dubai Light" size="17.0" />
                </font>
             </Text>
-            <Text fx:id="ReviewsTxt" fill="WHITE" layoutX="17.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reviews:" wrappingWidth="269.37694549560547">
+            <Text fx:id="ReviewsTxt" fill="WHITE" layoutX="16.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reviews:" wrappingWidth="269.37694549560547">
                <font>
                   <Font name="Dubai Light" size="17.0" />
                </font>
             </Text>
-            <Text fx:id="ReleaseDateTxt" fill="WHITE" layoutX="18.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Release Date:" wrappingWidth="269.37694549560547">
+            <Text fx:id="ReleaseDateTxt" fill="WHITE" layoutX="16.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Release Date:" wrappingWidth="269.37694549560547">
                <font>
                   <Font name="Dubai Light" size="17.0" />
                </font>
