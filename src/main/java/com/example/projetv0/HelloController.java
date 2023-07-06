@@ -34,12 +34,12 @@ public class HelloController {
         //displaying the best reviewed movie
         ResultSet rs = stat.executeQuery("SELECT * FROM `movie` ORDER BY review DESC LIMIT 1");
         if(rs.next()){
-            movieNameLbl.setText(rs.getString("name"));
-            movieGenreTxt.setText("Genre: " + rs.getString("genre"));
-            movieRelTxt.setText("Release date: " + rs.getString("date"));
-            movieRevTxt.setText("Reviews: " + rs.getString("review"));
-            movieImage.setImage(new Image(rs.getString("url")));
-            movieSynTxt.setText("Synopsis: " + rs.getString("synopsis"));
+            movieNameLbl.setText(rs.getString("movie_name"));
+            movieGenreTxt.setText("Genre: " + rs.getString("movie_genre"));
+            movieRelTxt.setText("Release date: " + rs.getString("movie_date"));
+            movieRevTxt.setText("Reviews: " + rs.getString("movie_review"));
+            movieImage.setImage(new Image(rs.getString("movie_url")));
+            movieSynTxt.setText("Synopsis: " + rs.getString("movie_synopsis"));
         }
 
         //hide and save leftPane (movie filter) in the home page
