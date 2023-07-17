@@ -14,7 +14,6 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException, SQLException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-
         HelloController home = fxmlLoader.getController();
         home.startPage();
 

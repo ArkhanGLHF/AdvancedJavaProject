@@ -23,9 +23,10 @@ public class HelloController {
     @FXML
     private BorderPane bPane;
     @FXML
+    private Label accountLbl;
+    @FXML
     private Label topLbl;
     private boolean isInHomePage = true;
-    private Session s;
 
     private static HelloController instance; // Variable pour stocker la référence du contrôleur principal
 
@@ -150,6 +151,13 @@ public class HelloController {
         }
     }
     void startPage() throws SQLException, IOException {
+        //checking session
+        if(isConnected()!=""){
+            accountLbl.setText(isConnected());
+        } else {
+            accountLbl.setText("ACCOUNT");
+        }
+
         //connection to database
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
         Statement stat = con.createStatement();
@@ -168,17 +176,26 @@ public class HelloController {
         }
     }
     @FXML
-    void accountManagement(MouseEvent event) throws IOException {
+    void accountManagement(MouseEvent event) throws IOException, SQLException {
         isInHomePage = false;
-        //loading the account page
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("account.fxml"));
-        BorderPane accountPane = loader.load();
-        //displaying
-        bPane.setCenter(accountPane);
+
         //if not connected, login
-        loader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
-        Pane loginPane = loader.load();
-        accountPane.setCenter(loginPane);
+        FXMLLoader loader;
+        Pane accountPane;
+        if(isConnected()==""){
+            loader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
+            accountPane = loader.load();
+            LoginController lc = loader.getController();
+            lc.setBorderPane(bPane);
+        } else { //else, displaying profile page
+            loader = new FXMLLoader(HelloApplication.class.getResource("profile.fxml"));
+            accountPane = loader.load();
+            ProfileController pc = loader.getController();
+            pc.setCenterPane(centerPane);
+        }
+        bPane.setCenter(null);
+        bPane.setCenter(accountPane);
+
     }
     @FXML
     void home(MouseEvent event) throws SQLException, IOException {
@@ -225,6 +242,24 @@ public class HelloController {
     @FXML
     void browseCinemas(MouseEvent event) {
         isInHomePage = false;
+    }
+    String isConnected() throws SQLException {
+        //connection to database
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
+        Statement stat = con.createStatement();
+
+        //searching for a connected account
+        ResultSet rs = stat.executeQuery("SELECT * FROM `admin` WHERE admin_isConnected = 1");
+        if(rs.next()){
+            return rs.getString("admin_name");
+        }else {
+            rs = stat.executeQuery("SELECT * FROM `member` WHERE member_isConnected = 1");
+            if(rs.next()){
+                return rs.getString("member_name");
+            }else{
+                return "";
+            }
+        }
     }
 
     void bookingPage(int movie_id) throws SQLException, IOException {
