@@ -26,6 +26,16 @@ public class HelloController {
     private Label topLbl;
     private boolean isInHomePage = true;
     private Session s;
+
+    private static HelloController instance; // Variable pour stocker la référence du contrôleur principal
+
+    public HelloController() {
+        instance = this;
+    }
+
+    public static HelloController getInstance() {
+        return instance;
+    }
     @FXML
     void nameFilter(MouseEvent event) throws SQLException, IOException {
         //clearing pane
@@ -49,7 +59,7 @@ public class HelloController {
 
             MovieLayoutController filmController = fxmlLoader.getController();
             filmController.setData(rs.getString("movie_url"), rs.getString("movie_name"),rs.getString("movie_synopsis"),
-                    rs.getString("movie_genre"), rs.getString("movie_review"), rs.getString("movie_date"));
+                    rs.getString("movie_genre"), rs.getString("movie_review"), rs.getString("movie_date"), rs.getInt("movie_id"));
             moviePresentationLayout.getChildren().add(filmbox);
 
         }
@@ -79,7 +89,7 @@ public class HelloController {
 
             MovieLayoutController filmController = fxmlLoader.getController();
             filmController.setData(rs.getString("movie_url"), rs.getString("movie_name"),rs.getString("movie_synopsis"),
-                    rs.getString("movie_genre"), rs.getString("movie_review"), rs.getString("movie_date"));
+                    rs.getString("movie_genre"), rs.getString("movie_review"), rs.getString("movie_date"), rs.getInt("movie_id"));
             moviePresentationLayout.getChildren().add(filmbox);
 
         }
@@ -108,7 +118,7 @@ public class HelloController {
 
             MovieLayoutController filmController = fxmlLoader.getController();
             filmController.setData(rs.getString("movie_url"), rs.getString("movie_name"),rs.getString("movie_synopsis"),
-                    rs.getString("movie_genre"), rs.getString("movie_review"), rs.getString("movie_date"));
+                    rs.getString("movie_genre"), rs.getString("movie_review"), rs.getString("movie_date"), rs.getInt("movie_id"));
             moviePresentationLayout.getChildren().add(filmbox);
 
         }
@@ -135,7 +145,7 @@ public class HelloController {
 
             MovieLayoutController filmController = fxmlLoader.getController();
             filmController.setData(rs.getString("movie_url"), rs.getString("movie_name"),rs.getString("movie_synopsis"),
-                    rs.getString("movie_genre"), rs.getString("movie_review"), rs.getString("movie_date"));
+                    rs.getString("movie_genre"), rs.getString("movie_review"), rs.getString("movie_date"), rs.getInt("movie_id"));
             moviePresentationLayout.getChildren().add(filmbox);
         }
     }
@@ -153,7 +163,7 @@ public class HelloController {
 
             MovieLayoutController filmController = fxmlLoader.getController();
             filmController.setData(rs.getString("movie_url"), rs.getString("movie_name"),rs.getString("movie_synopsis"),
-                    rs.getString("movie_genre"), rs.getString("movie_review"), rs.getString("movie_date"));
+                    rs.getString("movie_genre"), rs.getString("movie_review"), rs.getString("movie_date"), rs.getInt("movie_id"));
             moviePresentationLayout.getChildren().add(filmbox);
         }
     }
@@ -205,7 +215,7 @@ public class HelloController {
 
             MovieLayoutController filmController = fxmlLoader.getController();
             filmController.setData(rs.getString("movie_url"), rs.getString("movie_name"),rs.getString("movie_synopsis"),
-                    rs.getString("movie_genre"), rs.getString("movie_review"), rs.getString("movie_date"));
+                    rs.getString("movie_genre"), rs.getString("movie_review"), rs.getString("movie_date"), rs.getInt("movie_id"));
             moviePresentationLayout.getChildren().add(filmbox);
         }
 
@@ -215,5 +225,34 @@ public class HelloController {
     @FXML
     void browseCinemas(MouseEvent event) {
         isInHomePage = false;
+    }
+
+    void bookingPage(int movie_id) throws SQLException, IOException {
+        bPane.setCenter(null);
+        moviePresentationLayout.getChildren().clear();
+
+        //connection to database
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
+        Statement stat = con.createStatement();
+
+        //displaying the best reviewed movie
+        ResultSet rs = stat.executeQuery("SELECT * FROM `movie` WHERE movie_id="+movie_id);
+
+        if (rs.next()) {
+            System.out.println("id trouve");
+            System.out.println(rs.getString("movie_name"));
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("booking2.fxml"));
+            Pane bookingBox = fxmlLoader.load();
+
+            BookingController bookingController = fxmlLoader.getController();
+            bookingController.setDataBooking(rs.getString("movie_url"),rs.getString("movie_name"), rs.getString("movie_synopsis"),
+                    rs.getString("movie_genre"), rs.getString("movie_review"), rs.getString("movie_date"));
+            bPane.setCenter(bookingBox);
+
+        }else {
+            System.out.println("id introuvable");
+        }
+
     }
 }

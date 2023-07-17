@@ -16,7 +16,7 @@
       </Pane>
       <Pane prefHeight="350.0" prefWidth="1006.0">
          <children>
-            <Label fx:id="movieNameLbl" layoutX="15.0" layoutY="38.0" text="Movie name" textFill="WHITE">
+            <Label fx:id="movieNameLbl" layoutX="15.0" layoutY="38.0" onMouseClicked="#clickTitle" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" text="Movie name" textFill="WHITE">
                <font>
                   <Font name="Dubai Medium" size="25.0" />
                </font>
