@@ -2,13 +2,12 @@ package com.example.projetv0;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,7 +15,9 @@ import java.sql.*;
 
 public class ProfileController {
     @FXML
-    private Pane profilePane;
+    private BorderPane bPane;
+    @FXML
+    private Label profileNameLbl;
     @FXML
     private Label action1Lbl;
     @FXML
@@ -25,9 +26,19 @@ public class ProfileController {
     private Label action3Lbl;
     @FXML
     private Label action4Lbl;
-    private Pane centerPane;
-    void setCenterPane(Pane p){
-        centerPane = p;
+    private boolean isAdmin;
+    void setAction(boolean a, String n){
+        isAdmin = a;
+        profileNameLbl.setText(n);
+        if(a){
+            action1Lbl.setText("MOVIES");
+            action2Lbl.setText("PERFORMANCES");
+            action3Lbl.setText("MEMBERS");
+        }else{
+            action1Lbl.setText("SEE TICKETS");
+            action2Lbl.setText("MANAGE ACCOUNT");
+            action3Lbl.setText("TEST");
+        }
     }
     @FXML
     void logout(MouseEvent event) throws SQLException, IOException {
@@ -55,5 +66,47 @@ public class ProfileController {
                 statement.executeUpdate();
             }
         }
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("hello-view.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage lstage = (Stage) ((Node) (event.getSource())).getScene().getWindow();
+        HelloController hc = fxmlLoader.getController();
+        MouseEvent e = null;
+        hc.home(e);
+        Scene scene = new Scene(root);
+        lstage.setScene(scene);
+        lstage.show();
     }
+    @FXML
+    void action1clicked(MouseEvent event) throws SQLException, IOException {
+        FXMLLoader loader;
+
+        //if admin, manage movies
+        if(isAdmin){
+            loader = new FXMLLoader(HelloApplication.class.getResource("movieManagement.fxml"));
+            Pane managementPane = loader.load();
+            MovieManagementController mmc = loader.getController();
+            mmc.movieManagement();
+            bPane.setCenter(managementPane);
+        }
+        else{ //if member, see reservations
+
+        }
+    }
+
+    @FXML
+    void action2clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void action3clicked(MouseEvent event) {
+
+    }
+
+    @FXML
+    void action4clicked(MouseEvent event) {
+
+    }
+
 }

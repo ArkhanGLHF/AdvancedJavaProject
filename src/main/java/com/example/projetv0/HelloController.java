@@ -1,15 +1,10 @@
 package com.example.projetv0;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.image.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.text.*;
-
 import java.io.IOException;
 import java.sql.*;
 
@@ -19,21 +14,18 @@ public class HelloController {
     @FXML
     private Pane centerPane;
     @FXML
-    private Pane topPane;
-    @FXML
     private BorderPane bPane;
     @FXML
     private Label accountLbl;
     @FXML
     private Label topLbl;
     private boolean isInHomePage = true;
-
+    private boolean isAdmin = false;
+    private String profileName = "";
     private static HelloController instance; // Variable pour stocker la référence du contrôleur principal
-
     public HelloController() {
         instance = this;
     }
-
     public static HelloController getInstance() {
         return instance;
     }
@@ -152,7 +144,7 @@ public class HelloController {
     }
     void startPage() throws SQLException, IOException {
         //checking session
-        if(isConnected()!=""){
+        if(!isConnected().equals("")){
             accountLbl.setText(isConnected());
         } else {
             accountLbl.setText("ACCOUNT");
@@ -182,16 +174,14 @@ public class HelloController {
         //if not connected, login
         FXMLLoader loader;
         Pane accountPane;
-        if(isConnected()==""){
+        if(isConnected().equals("")){
             loader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
             accountPane = loader.load();
-            LoginController lc = loader.getController();
-            lc.setBorderPane(bPane);
         } else { //else, displaying profile page
             loader = new FXMLLoader(HelloApplication.class.getResource("profile.fxml"));
             accountPane = loader.load();
             ProfileController pc = loader.getController();
-            pc.setCenterPane(centerPane);
+            pc.setAction(isAdmin, profileName);
         }
         bPane.setCenter(null);
         bPane.setCenter(accountPane);
@@ -251,12 +241,17 @@ public class HelloController {
         //searching for a connected account
         ResultSet rs = stat.executeQuery("SELECT * FROM `admin` WHERE admin_isConnected = 1");
         if(rs.next()){
+            isAdmin = true;
+            profileName = rs.getString("admin_name");
             return rs.getString("admin_name");
         }else {
             rs = stat.executeQuery("SELECT * FROM `member` WHERE member_isConnected = 1");
             if(rs.next()){
+                isAdmin = false;
+                profileName = rs.getString("admin_name");
                 return rs.getString("member_name");
             }else{
+                profileName = "";
                 return "";
             }
         }

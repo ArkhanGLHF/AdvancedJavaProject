@@ -3,10 +3,11 @@ package com.example.projetv0;
 import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -14,22 +15,13 @@ import java.sql.*;
 
 public class LoginController {
     @FXML
-    private Button loginButton;
-    @FXML
     private TextField mailTxt;
     @FXML
     private PasswordField passwordTxt;
     @FXML
-    private Pane loginPane;
-    private BorderPane bPane;
-    void setBorderPane(BorderPane p){
-        bPane = p;
-    }
-    @FXML
     void login(ActionEvent event) throws SQLException, IOException {
         //connection to database
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
-        Statement stat = con.createStatement();
         String sql = "SELECT * FROM admin WHERE admin_name = ? AND admin_password = ?";
         PreparedStatement statement = con.prepareStatement(sql);
         statement.setString(1, mailTxt.getText());
@@ -59,7 +51,16 @@ public class LoginController {
                 statement.executeUpdate();
             }
         }
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("hello-view.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage lstage = (Stage) ((Node) (event.getSource())).getScene().getWindow();
+        HelloController hc = fxmlLoader.getController();
+        MouseEvent e = null;
+        hc.home(e);
+        Scene scene = new Scene(root);
+        lstage.setScene(scene);
+        lstage.show();
 
     }
 }
