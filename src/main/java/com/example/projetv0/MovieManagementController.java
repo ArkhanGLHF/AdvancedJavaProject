@@ -101,11 +101,11 @@ public class MovieManagementController {
             statement.setString(7, synopsis);
             statement.executeUpdate();
 
+            moviePresentationLayout.getChildren().clear();
             movieManagement();
         }
 
     }
-
     void movieManagement() throws SQLException, IOException {
         //connection to database
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");

@@ -100,8 +100,18 @@ public class ProfileController {
     }
 
     @FXML
-    void action3clicked(MouseEvent event) {
+    void action3clicked(MouseEvent event) throws IOException, SQLException {
+        FXMLLoader loader;
+        if(isAdmin){
+            loader = new FXMLLoader(HelloApplication.class.getResource("memberManagement.fxml"));
+            Pane managementPane = loader.load();
+            MemberManagementController mmc = loader.getController();
+            mmc.memberManagement();
+            bPane.setCenter(managementPane);
+        }
+        else{ //if member, see reservations
 
+        }
     }
 
     @FXML
