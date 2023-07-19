@@ -1,15 +1,10 @@
 package com.example.projetv0;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.image.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.text.*;
-
 import java.io.IOException;
 import java.sql.*;
 
@@ -19,20 +14,18 @@ public class HelloController {
     @FXML
     private Pane centerPane;
     @FXML
-    private Pane topPane;
-    @FXML
     private BorderPane bPane;
+    @FXML
+    private Label accountLbl;
     @FXML
     private Label topLbl;
     private boolean isInHomePage = true;
-    private Session s;
-
+    private boolean isAdmin = false;
+    private String profileName = "";
     private static HelloController instance; // Variable pour stocker la référence du contrôleur principal
-
     public HelloController() {
         instance = this;
     }
-
     public static HelloController getInstance() {
         return instance;
     }
@@ -150,6 +143,13 @@ public class HelloController {
         }
     }
     void startPage() throws SQLException, IOException {
+        //checking session
+        if(!isConnected().equals("")){
+            accountLbl.setText(isConnected());
+        } else {
+            accountLbl.setText("ACCOUNT");
+        }
+
         //connection to database
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
         Statement stat = con.createStatement();
@@ -168,17 +168,24 @@ public class HelloController {
         }
     }
     @FXML
-    void accountManagement(MouseEvent event) throws IOException {
+    void accountManagement(MouseEvent event) throws IOException, SQLException {
         isInHomePage = false;
-        //loading the account page
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("account.fxml"));
-        BorderPane accountPane = loader.load();
-        //displaying
-        bPane.setCenter(accountPane);
+
         //if not connected, login
-        loader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
-        Pane loginPane = loader.load();
-        accountPane.setCenter(loginPane);
+        FXMLLoader loader;
+        Pane accountPane;
+        if(isConnected().equals("")){
+            loader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
+            accountPane = loader.load();
+        } else { //else, displaying profile page
+            loader = new FXMLLoader(HelloApplication.class.getResource("profile.fxml"));
+            accountPane = loader.load();
+            ProfileController pc = loader.getController();
+            pc.setAction(isAdmin, profileName);
+        }
+        bPane.setCenter(null);
+        bPane.setCenter(accountPane);
+
     }
     @FXML
     void home(MouseEvent event) throws SQLException, IOException {
@@ -225,6 +232,29 @@ public class HelloController {
     @FXML
     void browseCinemas(MouseEvent event) {
         isInHomePage = false;
+    }
+    String isConnected() throws SQLException {
+        //connection to database
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
+        Statement stat = con.createStatement();
+
+        //searching for a connected account
+        ResultSet rs = stat.executeQuery("SELECT * FROM `admin` WHERE admin_isConnected = 1");
+        if(rs.next()){
+            isAdmin = true;
+            profileName = rs.getString("admin_name");
+            return rs.getString("admin_name");
+        }else {
+            rs = stat.executeQuery("SELECT * FROM `member` WHERE member_isConnected = 1");
+            if(rs.next()){
+                isAdmin = false;
+                profileName = rs.getString("member_name");
+                return rs.getString("member_name");
+            }else{
+                profileName = "";
+                return "";
+            }
+        }
     }
 
     void bookingPage(int movie_id) throws SQLException, IOException {

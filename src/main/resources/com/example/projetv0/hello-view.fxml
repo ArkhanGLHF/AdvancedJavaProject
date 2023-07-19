@@ -29,7 +29,7 @@
                         <Font name="Dubai Medium" size="27.0" />
                     </font>
                 </Label>
-                <Label alignment="CENTER" layoutX="1112.0" layoutY="10.0" onMouseClicked="#accountManagement" prefHeight="53.0" prefWidth="150.0" text="ACCOUNT" textFill="WHITE">
+                <Label fx:id="accountLbl" alignment="TOP_RIGHT" contentDisplay="RIGHT" layoutX="793.0" layoutY="10.0" onMouseClicked="#accountManagement" prefHeight="53.0" prefWidth="469.0" text="ACCOUNT" textAlignment="RIGHT" textFill="WHITE">
                     <font>
                         <Font name="Dubai Medium" size="27.0" />
                     </font>

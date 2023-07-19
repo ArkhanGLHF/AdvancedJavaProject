@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="1077.0" style="-fx-background-color: #2b2b2b;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetv0.MovieManagementLayoutController">
+   <children>
+      <Pane prefHeight="350.0" prefWidth="322.0">
+         <children>
+            <ImageView fx:id="movieImage" fitHeight="100.0" fitWidth="62.0" layoutX="26.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </Pane>
+      <Pane prefHeight="100.0" prefWidth="1171.0">
+         <children>
+            <Label fx:id="movieNameLbl" layoutX="14.0" layoutY="6.0" text="Movie name" textFill="WHITE">
+               <font>
+                  <Font name="Dubai Medium" size="25.0" />
+               </font>
+            </Label>
+            <Text fx:id="GenreTxt" fill="WHITE" layoutX="16.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre:" wrappingWidth="269.37694549560547">
+               <font>
+                  <Font name="Dubai Light" size="17.0" />
+               </font>
+            </Text>
+            <Text fx:id="ReviewsTxt" fill="WHITE" layoutX="16.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reviews:" wrappingWidth="269.37694549560547">
+               <font>
+                  <Font name="Dubai Light" size="17.0" />
+               </font>
+            </Text>
+            <Button fx:id="removeButton" layoutX="883.0" layoutY="16.0" mnemonicParsing="false" onAction="#removeMovie" text="Remove" />
+            <Button fx:id="editButton" layoutX="881.0" layoutY="58.0" mnemonicParsing="false" onAction="#editMovie" prefHeight="25.0" prefWidth="62.0" text="Edit" />
+            <TextField fx:id="txtName" layoutX="16.0" layoutY="7.0" promptText="Movie name" visible="false" />
+            <TextField fx:id="txtGenre" layoutX="16.0" layoutY="37.0" promptText="Genre" visible="false" />
+            <TextArea fx:id="txtSynopsis" layoutX="200.0" layoutY="13.0" prefHeight="73.0" prefWidth="208.0" promptText="Synopsis" visible="false" />
+            <TextField fx:id="txtReview" layoutX="16.0" layoutY="70.0" promptText="Review" visible="false" />
+            <TextField fx:id="txtLength" alignment="TOP_LEFT" layoutX="437.0" layoutY="5.0" prefHeight="25.0" prefWidth="75.0" promptText="Length" visible="false" />
+            <TextField fx:id="txtDate" alignment="TOP_LEFT" layoutX="437.0" layoutY="38.0" prefHeight="18.0" prefWidth="89.0" promptText="Release date" visible="false" />
+            <TextField fx:id="txtURL" alignment="TOP_LEFT" layoutX="437.0" layoutY="70.0" prefHeight="13.0" prefWidth="75.0" promptText="Image URL" visible="false" />
+            <Button fx:id="submitEditButton" layoutX="585.0" layoutY="37.0" mnemonicParsing="false" onAction="#submitEdit" text="Submit changes" visible="false" />
+            <Text fx:id="txtError" fill="#9d0000" layoutX="557.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error :" visible="false" wrappingWidth="155.27801513671875">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+   </children>
+</HBox>
