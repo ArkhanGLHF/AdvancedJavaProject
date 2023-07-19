@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="122.0" prefWidth="119.0" style="-fx-background-color: #2b2b2b;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetv0.PerformanceLayout">
+   <children>
+      <Pane prefHeight="100.0" prefWidth="206.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b2b2b" height="122.0" layoutX="3.0" stroke="#d4c414" strokeType="INSIDE" strokeWidth="8.0" width="206.0" />
+            <Label fx:id="hourPerf" alignment="CENTER" layoutX="37.0" layoutY="7.0" prefHeight="38.0" prefWidth="133.0" text="Hour" textFill="WHITE">
+               <font>
+                  <Font name="Dubai Medium" size="33.0" />
+               </font>
+            </Label>
+            <Label fx:id="screenPerf" alignment="CENTER" layoutX="31.0" layoutY="60.0" prefHeight="36.0" prefWidth="145.0" text="Screen" textFill="WHITE">
+               <font>
+                  <Font name="Dubai Medium" size="32.0" />
+               </font>
+            </Label>
+            <Polygon fill="#d4c414" layoutX="277.0" layoutY="80.0" points="-74.19998168945312, 40.0, -74.19996643066406, 0.20001220703125, -95.80000305175781, 40.0" stroke="#d4c414" strokeType="INSIDE" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

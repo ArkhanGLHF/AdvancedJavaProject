@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="207.0" prefWidth="600.0" style="-fx-background-color: #2b2b2b;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetv0.CinemaPerformanceLayout">
+   <children>
+      <Label fx:id="cinemaName" alignment="TOP_LEFT" prefHeight="64.0" prefWidth="325.0" text="Cinema" textFill="WHITE">
+         <font>
+            <Font name="Dubai Medium" size="36.0" />
+         </font>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets left="50.0" />
+         </padding>
+      </Label>
+      <HBox fx:id="performanceCinema" prefHeight="142.0" prefWidth="600.0">
+         <padding>
+            <Insets left="100.0" />
+         </padding>
+      </HBox>
+   </children>
+</VBox>

@@ -247,7 +247,7 @@ public class HelloController {
 
             BookingController bookingController = fxmlLoader.getController();
             bookingController.setDataBooking(rs.getString("movie_url"),rs.getString("movie_name"), rs.getString("movie_synopsis"),
-                    rs.getString("movie_genre"), rs.getString("movie_review"), rs.getString("movie_date"));
+                    rs.getString("movie_genre"), rs.getString("movie_review"), rs.getString("movie_date"), movie_id);
             bPane.setCenter(bookingBox);
 
         }else {
