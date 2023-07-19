@@ -248,7 +248,7 @@ public class HelloController {
             rs = stat.executeQuery("SELECT * FROM `member` WHERE member_isConnected = 1");
             if(rs.next()){
                 isAdmin = false;
-                profileName = rs.getString("admin_name");
+                profileName = rs.getString("member_name");
                 return rs.getString("member_name");
             }else{
                 profileName = "";

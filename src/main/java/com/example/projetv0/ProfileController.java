@@ -109,7 +109,7 @@ public class ProfileController {
             mmc.memberManagement();
             bPane.setCenter(managementPane);
         }
-        else{ //if member, see reservations
+        else{
 
         }
     }

@@ -22,17 +22,17 @@
                         <Font name="Dubai Medium" size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="action2Lbl" alignment="CENTER" contentDisplay="CENTER" layoutX="127.0" layoutY="113.0" onMouseClicked="#action2clicked" prefHeight="31.0" prefWidth="163.0" text="Action2" textFill="WHITE">
+                  <Label fx:id="action2Lbl" alignment="CENTER" contentDisplay="CENTER" layoutX="128.0" layoutY="122.0" onMouseClicked="#action2clicked" prefHeight="31.0" prefWidth="163.0" text="Action2" textFill="WHITE">
                      <font>
                         <Font name="Dubai Regular" size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="action3Lbl" alignment="CENTER" contentDisplay="CENTER" layoutX="127.0" layoutY="150.0" onMouseClicked="#action3clicked" prefHeight="31.0" prefWidth="163.0" text="Action3" textFill="WHITE">
+                  <Label fx:id="action3Lbl" alignment="CENTER" contentDisplay="CENTER" layoutX="127.0" layoutY="166.0" onMouseClicked="#action3clicked" prefHeight="31.0" prefWidth="163.0" text="Action3" textFill="WHITE">
                      <font>
                         <Font name="Dubai Regular" size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="action4Lbl" alignment="CENTER" contentDisplay="CENTER" layoutX="127.0" layoutY="181.0" onMouseClicked="#action4clicked" prefHeight="31.0" prefWidth="163.0" text="Action4" textFill="WHITE">
+                  <Label fx:id="action4Lbl" alignment="CENTER" contentDisplay="CENTER" layoutX="128.0" layoutY="208.0" onMouseClicked="#action4clicked" prefHeight="31.0" prefWidth="163.0" text="Action4" textFill="WHITE">
                      <font>
                         <Font name="Dubai Regular" size="17.0" />
                      </font>

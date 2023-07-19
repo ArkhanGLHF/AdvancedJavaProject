@@ -45,9 +45,6 @@ public class MemberManagementController {
         } else if(password.equals("")){
             txtError.setText("Error: Password cannot be null");
             flag = true;
-        } else if (url.equals("")) {
-            txtError.setText("Error: Profile image URL cannot be null");
-            flag = true;
         }
 
         //checking if mail adress is already used by another member
@@ -68,6 +65,9 @@ public class MemberManagementController {
         if(flag){
             txtError.setVisible(true);
         } else{ //else add the new member in the database
+            if(txtURL.getText().equals("")){
+                url = "https://cdn.discordapp.com/attachments/1131006802713120819/1131190939386392586/5770f01a32c3c53e90ecda61483ccb08.png";
+            }
             sql = "INSERT INTO member (member_name, member_mail, member_password, member_url, member_isConnected) VALUES (?, ?, ?, ?, ?)";
             statement = con.prepareStatement(sql);
             statement.setString(1, name);
