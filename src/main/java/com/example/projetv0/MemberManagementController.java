@@ -12,9 +12,10 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.sql.*;
 
+/**
+ * Main page of the member management page for the admin, displaying every member and functions to add/delete/edit
+ */
 public class MemberManagementController {
-    @FXML
-    private Pane memberManagementPane;
     @FXML
     private VBox memberPresentationLayout;
     @FXML
@@ -27,8 +28,13 @@ public class MemberManagementController {
     private TextField txtPassword;
     @FXML
     private TextField txtURL;
+
+    /**
+     * Function to add a new member
+     */
     @FXML
-    void addMember(ActionEvent event) throws SQLException, IOException {
+    void addMember() throws SQLException, IOException {
+        //getting the values entered in the text fields
         boolean flag = false;
         String name = txtName.getText();
         String mail = txtMail.getText();
@@ -48,7 +54,6 @@ public class MemberManagementController {
         }
 
         //checking if mail adress is already used by another member
-        //connection to database
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
         String sql = "SELECT * FROM member";
         PreparedStatement statement = con.prepareStatement(sql);
@@ -66,6 +71,7 @@ public class MemberManagementController {
             txtError.setVisible(true);
         } else{ //else add the new member in the database
             if(txtURL.getText().equals("")){
+                //if no profile picture, set the default one
                 url = "https://cdn.discordapp.com/attachments/1131006802713120819/1131190939386392586/5770f01a32c3c53e90ecda61483ccb08.png";
             }
             sql = "INSERT INTO member (member_name, member_mail, member_password, member_url, member_isConnected) VALUES (?, ?, ?, ?, ?)";
@@ -77,10 +83,15 @@ public class MemberManagementController {
             statement.setInt(5, 0);
             statement.executeUpdate();
 
+            //clear and display again the member management page
             memberPresentationLayout.getChildren().clear();
             memberManagement();
         }
     }
+
+    /**
+     * Function to display every member in the database
+     */
     void memberManagement() throws SQLException, IOException {
         //connection to database
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");

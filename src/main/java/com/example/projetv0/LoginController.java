@@ -15,6 +15,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
 
+/**
+ * Login Controller for login and account creation
+ */
 public class LoginController {
     @FXML
     private AnchorPane createPane;
@@ -36,13 +39,23 @@ public class LoginController {
     private TextField txtURL;
     @FXML
     private Text txtError;
+
+    /**
+     * Displaying the create account pane
+     */
     @FXML
-    void createAccount(MouseEvent event) {
+    void createAccount() {
+        //displaying the create account pane
         loginPane.setVisible(false);
         createPane.setVisible(true);
     }
+
+    /**
+     * Function to create a new account
+     */
     @FXML
     void create(ActionEvent event) throws SQLException, IOException {
+        //checking if the texts are empty
         boolean flag = false;
         if(txtName.getText().equals("")){
             flag = true;
@@ -68,13 +81,15 @@ public class LoginController {
             }
         }
 
+        //if we got an error, display text
         if(flag){
             txtError.setVisible(true);
         } else{
             if(txtURL.getText().equals("")){
+                //if user didn't set his profile picture, use the default one
                 txtURL.setText("https://cdn.discordapp.com/attachments/1131006802713120819/1131190939386392586/5770f01a32c3c53e90ecda61483ccb08.png");
             }
-            //connection to database
+            //adding the member into the database
             sql = "INSERT INTO member (member_name, member_mail, member_password, member_url, member_isConnected) VALUES (?, ?, ?, ?, ?)";
             statement = con.prepareStatement(sql);
             statement.setString(1, txtName.getText());
@@ -97,16 +112,26 @@ public class LoginController {
             lstage.show();
         }
     }
+
+    /**
+     * Displaying the login pane
+     */
     @FXML
-    void log(MouseEvent event) {
+    void log() {
+        //displaying the login pane
         createPane.setVisible(false);
         loginPane.setVisible(true);
     }
+
+    /**
+     * Function to log an account with database
+     */
     @FXML
     void login(ActionEvent event) throws SQLException, IOException {
         boolean connected = false;
         //connection to database
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
+        //checking first if the account is admin
         String sql = "SELECT * FROM admin WHERE admin_name = ? AND admin_password = ?";
         PreparedStatement statement = con.prepareStatement(sql);
         statement.setString(1, mailTxt.getText());
@@ -138,6 +163,7 @@ public class LoginController {
                 connected = true;
             }
         }
+        //if connection successful, reload home page
         if(connected){
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("hello-view.fxml"));
@@ -150,6 +176,7 @@ public class LoginController {
             lstage.setScene(scene);
             lstage.show();
         } else {
+            //else display error
             errorTxt.setText("Error: Incorrect informations");
             errorTxt.setVisible(true);
         }

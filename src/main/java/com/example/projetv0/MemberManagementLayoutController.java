@@ -19,6 +19,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
 
+/**
+ * Page of a member individually, displayed in the member management page of the admin
+ */
 public class MemberManagementLayoutController {
     private int member_id;
     @FXML
@@ -45,7 +48,12 @@ public class MemberManagementLayoutController {
     private TextField txtPassword;
     @FXML
     private TextArea txtURL;
+
+    /**
+     * Function to receive the data for the member
+     */
     public void setData(String imageSrc, String name, String password, String mail, int memberID){
+        //setting the data to display
         Image image = new Image(imageSrc);
         memberImage.setImage(image);
         memberNameLbl.setText(name);
@@ -53,14 +61,19 @@ public class MemberManagementLayoutController {
         mailTxt.setText("Mail adress: " + mail);
         member_id = memberID;
     }
+
+    /**
+     * Function to display the edit fields for a member
+     */
     @FXML
-    void editMember(ActionEvent event) throws SQLException {
+    void editMember() throws SQLException {
         //connection to database
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
         Statement stat = con.createStatement();
         String sql = "SELECT * FROM `member` WHERE member_id=" + member_id;
         ResultSet rs = stat.executeQuery(sql);
-        if(rs.next()) {//display edit boxes
+        if(rs.next()) {
+            //display edit boxes filled
             txtName.setVisible(true);
             txtName.setText(rs.getString("member_name"));
             txtMail.setVisible(true);
@@ -79,14 +92,20 @@ public class MemberManagementLayoutController {
             removeButton.setVisible(false);
         }
     }
+
+    /**
+     * Function to delete a member account
+     */
     @FXML
     void removeMember(ActionEvent event) throws SQLException, IOException {
         //connection to database
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
         Statement stat = con.createStatement();
+        //deleting account from database
         String sql = "DELETE FROM `member` WHERE member_id = " + member_id;
         stat.executeUpdate(sql);
 
+        //reloading account management page
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("hello-view.fxml"));
         Parent root = fxmlLoader.load();
@@ -98,8 +117,13 @@ public class MemberManagementLayoutController {
         lstage.setScene(scene);
         lstage.show();
     }
+
+    /**
+     * Function to send the edited information to the database
+     */
     @FXML
     void submitEdit(ActionEvent event) throws SQLException, IOException {
+        //getting all values entered in text-fields
         boolean flag = false;
         String name = txtName.getText();
         String mail = txtMail.getText();
@@ -122,12 +146,12 @@ public class MemberManagementLayoutController {
         }
 
         //checking if mail adress is already used by another member
-        //connection to database
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
         String sql = "SELECT * FROM member";
         PreparedStatement statement = con.prepareStatement(sql);
         ResultSet rs = statement.executeQuery();
-        while (rs.next()){ //if the mail is found in the database and by another member
+        while (rs.next()){
+            //if the mail is found in the database and by another member
             if(rs.getString("member_mail").equals(mail) && rs.getInt("member_id")!= member_id){
                 txtError.setText("Error: Mail already used by another member");
                 flag = true;
@@ -135,10 +159,11 @@ public class MemberManagementLayoutController {
             }
         }
 
+        //if we had an error, display it
         if(flag){
             txtError.setVisible(true);
         } else{
-            //connection to database
+            //we update the information in the database
             sql = "UPDATE member SET member_name=?, member_mail=?, member_password=?, member_url=? WHERE member_id=" + member_id;
             statement = con.prepareStatement(sql);
             statement.setString(1, name);

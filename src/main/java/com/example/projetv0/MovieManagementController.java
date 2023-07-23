@@ -1,15 +1,16 @@
 package com.example.projetv0;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.*;
-
 import java.io.IOException;
 import java.sql.*;
 
+/**
+ * Main page of the movie management page for the admin, displaying every movie and functions to add/delete/edit
+ */
 public class MovieManagementController {
     @FXML
     private VBox moviePresentationLayout;
@@ -29,8 +30,13 @@ public class MovieManagementController {
     private TextArea txtSynopsis;
     @FXML
     private TextField txtURL;
+
+    /**
+     * Function to add a movie to the database
+     */
     @FXML
-    void addMovie(ActionEvent event) throws SQLException, IOException {
+    void addMovie() throws SQLException, IOException {
+        //getting the values in the text-fields
         boolean flag = false;
         String name = txtName.getText();
         String genre = txtGenre.getText();
@@ -61,6 +67,7 @@ public class MovieManagementController {
             flag = true;
         }
         if(!txtLength.getText().equals("")) {
+            //checking if movie length is greater than 0
             if(Integer.parseInt(txtLength.getText()) < 0){
                 txtError.setText("Error: Movie length must be greater than 1");
                 flag = true;
@@ -81,14 +88,16 @@ public class MovieManagementController {
             }
         }
 
+        //if we had an error, display it
         if(flag){
             txtError.setVisible(true);
         } else{
+            //casting the values
             int length = Integer.parseInt(txtLength.getText());
             int release = Integer.parseInt(txtDate.getText());
             float review = Float.parseFloat(txtReview.getText());
 
-            //connection to database
+            //adding the movie in the database
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
             String sql = "INSERT INTO movie (movie_name, movie_genre, movie_length, movie_date, movie_review, movie_url, movie_synopsis) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = con.prepareStatement(sql);
@@ -101,17 +110,21 @@ public class MovieManagementController {
             statement.setString(7, synopsis);
             statement.executeUpdate();
 
+            //clearing and displaying the updated movie management page
             moviePresentationLayout.getChildren().clear();
             movieManagement();
         }
 
     }
+    /**
+     * Function to display every movie in the database
+     */
     void movieManagement() throws SQLException, IOException {
         //connection to database
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
         Statement stat = con.createStatement();
 
-        //displaying the best reviewed movie
+        //displaying every movie
         ResultSet rs = stat.executeQuery("SELECT * FROM `movie`");
         while (rs.next()) {
             FXMLLoader fxmlLoader = new FXMLLoader();

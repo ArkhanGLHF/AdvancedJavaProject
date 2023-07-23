@@ -15,10 +15,8 @@ import java.sql.*;
  * Controller of cinemaPerformanceLayout.fxml
  */
 public class CinemaPerformanceLayout {
-
     @FXML
     private Label cinemaName;
-
     @FXML
     private HBox performanceCinema;
 
