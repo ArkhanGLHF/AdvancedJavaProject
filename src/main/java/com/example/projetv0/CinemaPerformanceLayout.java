@@ -11,12 +11,20 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.sql.*;
 
+/**
+ * Controller of cinemaPerformanceLayout.fxml
+ */
 public class CinemaPerformanceLayout {
     @FXML
     private Label cinemaName;
     @FXML
     private HBox performanceCinema;
 
+    /**
+     *Set the attributes of the class to display
+     * It search all the different cinemas which show the movie on the day selected
+     * Then it displays all the performances of this movie on the good day under each cinema
+     */
     public void setDataCinePerf(int cineID,String date) throws SQLException, IOException {
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
         Statement stat1 = con.createStatement();

@@ -3,17 +3,28 @@ package com.example.projetv0;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.CheckBox;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
+import java.io.IOException;
 import java.sql.*;
+
+/**
+ * Controller of fxml file paiementLayout where you can fill your informations of payment.
+ */
 
 public class PaiementLayout {
 
     private ObservableList<CheckBox> selected_CheckBoxes = FXCollections.observableArrayList();
     private int id_performance;
+
+    /**
+     * Create the user tickets when he fills his information of payment
+     */
     @FXML
-    void okPaiement(MouseEvent event) throws SQLException {
+    void okPaiement() throws SQLException, IOException {
         //connection to database
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
         Statement stat = con.createStatement();
@@ -47,6 +58,8 @@ public class PaiementLayout {
                 int rowsAffected = createTicketStmt.executeUpdate();
                 if (rowsAffected > 0) {
                     System.out.println("Ticket inserted successfully.");
+                    HelloController helloController = HelloController.getInstance();
+                    helloController.startPage();
                 } else {
                     System.out.println("Error inserting ticket.");
                 }
@@ -57,6 +70,10 @@ public class PaiementLayout {
 
         //redirection to recap of booking
     }
+
+    /**
+     * This function set the information needed in the fxml file
+     */
 
     public void setDataPaiement(ObservableList<CheckBox> selectedCheckBoxes, int performance_id ){
         selected_CheckBoxes = selectedCheckBoxes;

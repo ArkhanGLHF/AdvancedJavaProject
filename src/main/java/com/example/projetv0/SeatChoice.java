@@ -20,6 +20,9 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Controller of seatChoice.fxml
+ */
 public class SeatChoice {
     @FXML
     private CheckBox checkbox1;
@@ -153,6 +156,10 @@ public class SeatChoice {
 
 
     // Initialization method
+
+    /**
+     * This function map all the checkbox so I can attribute them a number which corresponds to it seat number
+     */
     public void initialize() {
         checkBoxMap.put(1, checkbox1);
         checkBoxMap.put(2, checkbox2);
@@ -208,6 +215,10 @@ public class SeatChoice {
 
 
     }
+
+    /**
+     *Set the attributes of the class so I can display them
+     */
     public void setDataSeatChoice(int perf_id) throws SQLException {
         performance_id = perf_id;
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
@@ -234,6 +245,10 @@ public class SeatChoice {
         }
     }
 
+    /**
+     *If a checkBox is selected, it is added in a list
+     * If a checkbox is deselected, it is removed from the list
+     */
     @FXML
     void handleCheckBoxSelection(MouseEvent event) {
         CheckBox clickedCheckBox = (CheckBox) event.getSource();
@@ -244,6 +259,10 @@ public class SeatChoice {
         }
         updateSeatsSelected();
     }
+
+    /**
+     * Update the informations of the page in real time
+     */
 
     void updateSeatsSelected(){
         textChoice.setText("");
@@ -264,8 +283,12 @@ public class SeatChoice {
     private BorderPane borderPaneSeats;
     @FXML
     private VBox vBoxPaiement;
+
+    /**
+     *If the customer wants to pay, it displays the payment page
+     */
     @FXML
-    void buttonProceedClicked(MouseEvent event) throws IOException {
+    void buttonProceedClicked() throws IOException {
         if (selectedCheckBoxes.size()!=0) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("paiementLayout.fxml"));

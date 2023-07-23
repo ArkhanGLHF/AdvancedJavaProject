@@ -20,6 +20,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
+
 public class BookingController {
     @FXML
     private Label genreLbl;
