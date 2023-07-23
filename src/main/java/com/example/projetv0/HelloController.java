@@ -257,6 +257,13 @@ public class HelloController {
         }
     }
 
+    /**
+     * Redirect us on the booking page of a movie we clicked on
+     * @param movie_id
+     * @throws SQLException
+     * @throws IOException
+     */
+
     void bookingPage(int movie_id) throws SQLException, IOException {
         bPane.setCenter(null);
         moviePresentationLayout.getChildren().clear();

@@ -16,6 +16,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Controller of movieLayout.fxml
+ */
+
 public class MovieLayoutController {
 
     private int movie_id;
@@ -38,23 +42,42 @@ public class MovieLayoutController {
     @FXML
     private Label movieNameLbl;
 
+    /**
+     * Underline the text if the mouse entered
+     */
     @FXML
-    void mouseEntered(MouseEvent event) {
+    void mouseEntered() {
         movieNameLbl.setUnderline(true);
     }
 
+    /**
+     * Remove the underline
+     */
     @FXML
-    void mouseExited(MouseEvent event) {
+    void mouseExited() {
         movieNameLbl.setUnderline(false);
     }
 
+    /**
+     *If we click on the movie title, it redirect us on the booking page of this movie
+     */
     @FXML
-    void clickTitle(MouseEvent event) throws IOException, SQLException {
+    void clickTitle() throws IOException, SQLException {
         System.out.println("click");
         HelloController helloController = HelloController.getInstance();
         helloController.bookingPage(movie_id);
     }
 
+    /**
+     * Set all the data we need to display
+     * @param imageSrc
+     * @param name
+     * @param Synopsis
+     * @param Genre
+     * @param Reviews
+     * @param Release
+     * @param movieId
+     */
     public void setData(String imageSrc, String name, String Synopsis, String Genre, String Reviews, String Release, int movieId){
         Image image = new Image(imageSrc);
 
