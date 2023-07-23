@@ -24,20 +24,19 @@ public class ProfileController {
     private Label action2Lbl;
     @FXML
     private Label action3Lbl;
-    @FXML
-    private Label action4Lbl;
     private boolean isAdmin;
     void setAction(boolean a, String n){
         isAdmin = a;
         profileNameLbl.setText(n);
         if(a){
+            action3Lbl.setVisible(true);
             action1Lbl.setText("MOVIES");
             action2Lbl.setText("PERFORMANCES");
             action3Lbl.setText("MEMBERS");
         }else{
             action1Lbl.setText("SEE TICKETS");
             action2Lbl.setText("MANAGE ACCOUNT");
-            action3Lbl.setText("TEST");
+            action3Lbl.setVisible(false);
         }
     }
     @FXML
@@ -80,7 +79,6 @@ public class ProfileController {
     @FXML
     void action1clicked(MouseEvent event) throws SQLException, IOException {
         FXMLLoader loader;
-
         //if admin, manage movies
         if(isAdmin){
             loader = new FXMLLoader(HelloApplication.class.getResource("movieManagement.fxml"));
@@ -95,8 +93,23 @@ public class ProfileController {
     }
 
     @FXML
-    void action2clicked(MouseEvent event) {
-
+    void action2clicked(MouseEvent event) throws IOException, SQLException {
+        FXMLLoader loader;
+        if(isAdmin){
+            //manage every performance
+            loader = new FXMLLoader(HelloApplication.class.getResource("performanceManagement.fxml"));
+            Pane managementPane = loader.load();
+            PerformanceManagementController pmc = loader.getController();
+            pmc.managePerformance();
+            bPane.setCenter(managementPane);
+        } else {
+            //manage account for member
+            loader = new FXMLLoader(HelloApplication.class.getResource("accountManagement.fxml"));
+            Pane managementPane = loader.load();
+            AccountManagementController amc = loader.getController();
+            amc.manageAccount();
+            bPane.setCenter(managementPane);
+        }
     }
 
     @FXML

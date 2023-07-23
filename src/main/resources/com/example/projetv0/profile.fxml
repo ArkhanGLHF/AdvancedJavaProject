@@ -32,11 +32,6 @@
                         <Font name="Dubai Regular" size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="action4Lbl" alignment="CENTER" contentDisplay="CENTER" layoutX="128.0" layoutY="208.0" onMouseClicked="#action4clicked" prefHeight="31.0" prefWidth="163.0" text="Action4" textFill="WHITE">
-                     <font>
-                        <Font name="Dubai Regular" size="17.0" />
-                     </font>
-                  </Label>
                   <Label layoutX="341.0" layoutY="285.0" onMouseClicked="#logout" text="Logout" textFill="WHITE">
                      <font>
                         <Font name="Dubai Regular" size="17.0" />

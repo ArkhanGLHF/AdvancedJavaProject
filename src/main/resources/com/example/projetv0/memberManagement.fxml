@@ -24,15 +24,15 @@
       <Pane layoutX="-3.0" layoutY="411.0" prefHeight="91.0" prefWidth="1106.0">
          <children>
             <TextField fx:id="txtMail" alignment="TOP_LEFT" layoutX="26.0" layoutY="21.0" prefHeight="25.0" prefWidth="192.0" promptText="Mail adress" />
+            <TextField fx:id="txtPassword" alignment="TOP_LEFT" layoutX="26.0" layoutY="54.0" prefHeight="25.0" prefWidth="192.0" promptText="Password" />
+            <TextField fx:id="txtName" alignment="TOP_LEFT" layoutX="240.0" layoutY="21.0" prefHeight="25.0" prefWidth="192.0" promptText="Member name" />
+            <TextField fx:id="txtURL" alignment="TOP_LEFT" layoutX="240.0" layoutY="54.0" prefHeight="25.0" prefWidth="192.0" promptText="Profile Image URL" />
             <Button layoutX="595.0" layoutY="33.0" mnemonicParsing="false" onAction="#addMember" text="Add a new member" />
             <Text fx:id="txtError" fill="#9d0000" layoutX="595.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error :" visible="false" wrappingWidth="503.27789306640625">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Text>
-            <TextField fx:id="txtPassword" alignment="TOP_LEFT" layoutX="26.0" layoutY="54.0" prefHeight="25.0" prefWidth="192.0" promptText="Password" />
-            <TextField fx:id="txtName" alignment="TOP_LEFT" layoutX="240.0" layoutY="21.0" prefHeight="25.0" prefWidth="192.0" promptText="Member name" />
-            <TextField fx:id="txtURL" alignment="TOP_LEFT" layoutX="240.0" layoutY="54.0" prefHeight="25.0" prefWidth="192.0" promptText="Profile Image URL" />
          </children>
       </Pane>
    </children>
