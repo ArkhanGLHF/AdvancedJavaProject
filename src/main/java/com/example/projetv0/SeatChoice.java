@@ -269,10 +269,11 @@ public class SeatChoice {
         if (selectedCheckBoxes.size()!=0) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("paiementLayout.fxml"));
-            Pane paiement = fxmlLoader.load();
+            Pane payment = fxmlLoader.load();
 
-            PerformanceLayout performanceLayoutController = fxmlLoader.getController();
-            vBoxPaiement.getChildren().add(paiement);
+            PaiementLayout paymentLayoutController = fxmlLoader.getController();
+            paymentLayoutController.setDataPaiement(selectedCheckBoxes, performance_id);
+            vBoxPaiement.getChildren().add(payment);
         }
     }
 }
