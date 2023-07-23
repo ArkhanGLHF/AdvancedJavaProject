@@ -10,7 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -21,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ *Controller for booking2.fxml
  */
 
 public class BookingController {
@@ -46,14 +45,15 @@ public class BookingController {
     @FXML
     private AnchorPane PaneDay1;
 
-    @FXML
-    private AnchorPane PaneDay2;
 
     @FXML
     private VBox performancePresentationLayout;
 
     private int movieID;
 
+    /**
+     *I set the animations to choose the day
+     */
     public void translateAnimation(double duration, Node node, double width){
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(duration), node);
         translateTransition.setByX(width);
@@ -62,16 +62,23 @@ public class BookingController {
 
     int show=0;
 
+    /**
+     * Animation for swipe the day bar to the right
+     */
     @FXML
-    void next(MouseEvent event) {
+    void next() {
         System.out.println(show);
         if (show==0){
             translateAnimation(0.5, PaneDay1, -1050);
             show++;
         }
     }
+
+    /**
+     * Swipe the day bar to the left
+     */
     @FXML
-    void back(MouseEvent event) {
+    void back() {
         System.out.println(show);
         if (show==1){
             translateAnimation(0.5, PaneDay1, 1050);
@@ -79,8 +86,12 @@ public class BookingController {
         }
     }
 
+    /**
+     *When you select a day, it displays all the cinemas with the hours of the performances of that day for the movie you want
+     */
     @FXML
     void daySelected(MouseEvent event) throws SQLException, IOException {
+        performancePresentationLayout.getChildren().clear();
         System.out.println("button clicked");
         Button clickedButton = (Button) event.getSource();
         String date = clickedButton.getId();
@@ -89,7 +100,6 @@ public class BookingController {
         //connection to database
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
         Statement stat = con.createStatement();
-        Statement stat1 = con.createStatement();
 
         // displaying all the show at this date
         ResultSet perf = stat.executeQuery("SELECT * FROM performance WHERE performance_date='"+date+"'AND movie_id='"+movieID+"'");
@@ -99,12 +109,12 @@ public class BookingController {
             int exist;
             exist=0;
 
-            for (int i = 0; i < cinemaIds.size(); i++) {
-                if(cinemaIds.get(i) != cinemaId) {
+            for (Integer id : cinemaIds) {
+                if (id != cinemaId) {
                     //does not exist
                     exist = 0;
-                }else
-                    exist=1;
+                } else
+                    exist = 1;
 
             }
             if (exist==0){
@@ -113,13 +123,13 @@ public class BookingController {
             }
 
         }
-        for (int i = 0; i < cinemaIds.size(); i++) {
+        for (Integer cinemaId : cinemaIds) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("cinemaPerformanceLayout.fxml"));
             VBox cinemaPerf = fxmlLoader.load();
 
             CinemaPerformanceLayout cinemaPerformanceLayout = fxmlLoader.getController();
-            cinemaPerformanceLayout.setDataCinePerf(cinemaIds.get(i),date);
+            cinemaPerformanceLayout.setDataCinePerf(cinemaId, date);
             performancePresentationLayout.getChildren().add(cinemaPerf);
 
         }
@@ -127,8 +137,9 @@ public class BookingController {
     }
 
 
-
-
+    /**
+     * Set the datas we need to display
+     */
 
     public void setDataBooking(String imageSrc, String title, String Synopsis, String Genre, String Reviews, String Release,
                                int IDmovie){
