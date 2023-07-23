@@ -285,4 +285,31 @@ public class HelloController {
         }
 
     }
+
+    void seatsReservation(int performance_id) throws SQLException, IOException {
+        bPane.setCenter(null);
+        moviePresentationLayout.getChildren().clear();
+
+        //connection to database
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
+        Statement stat = con.createStatement();
+
+        //displaying the best reviewed movie
+        ResultSet rs = stat.executeQuery("SELECT * FROM `performance` WHERE performance_id="+performance_id);
+
+        if (rs.next()) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("seatChoice.fxml"));
+            AnchorPane reservationPage = fxmlLoader.load();
+
+            SeatChoice seatChoiceController = fxmlLoader.getController();
+            seatChoiceController.setDataSeatChoice(performance_id);
+
+            bPane.setCenter(reservationPage);
+
+        }else {
+            System.out.println("id introuvable");
+        }
+
+    }
 }

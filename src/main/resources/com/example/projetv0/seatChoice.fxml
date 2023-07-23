@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="1049.0" style="-fx-background-color: #2b2b2b;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetv0.SeatChoice">
+   <children>
+      <ScrollPane prefHeight="508.0" prefWidth="1094.0">
+         <content>
+            <BorderPane fx:id="borderPaneSeats" prefHeight="725.0" prefWidth="1076.0" style="-fx-background-color: #2b2b2b;">
+               <top>
+                  <Label text="CHOOSE YOUR SEATS" textFill="WHITE" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="Dubai Medium" size="41.0" />
+                     </font>
+                  </Label>
+               </top>
+               <left>
+                  <Pane prefHeight="299.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label fx:id="datePerf" alignment="CENTER" layoutY="236.0" prefHeight="32.0" prefWidth="200.0" text="Date" textFill="WHITE">
+                           <font>
+                              <Font name="Dubai Medium" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="hourPerf" alignment="CENTER" layoutY="268.0" prefHeight="32.0" prefWidth="200.0" text="Hour" textFill="WHITE">
+                           <font>
+                              <Font name="Dubai Medium" size="18.0" />
+                           </font>
+                        </Label>
+                        <Text fx:id="filmTitle" fill="WHITE" layoutX="-58.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="399.736026763916">
+                           <font>
+                              <Font name="Dubai Medium" size="18.0" />
+                           </font>
+                        </Text>
+                        <ImageView fx:id="filmImage" fitHeight="150.0" fitWidth="124.0" layoutX="38.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </Pane>
+               </left>
+               <right>
+                  <Pane prefHeight="238.0" prefWidth="309.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label alignment="CENTER" layoutX="14.0" layoutY="65.0" prefHeight="32.0" prefWidth="162.0" text="Your Reservation" textFill="WHITE">
+                           <font>
+                              <Font name="Dubai Medium" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutY="117.0" prefHeight="32.0" prefWidth="162.0" text="Number of places: " textFill="WHITE">
+                           <font>
+                              <Font name="Dubai Medium" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutY="222.0" prefHeight="32.0" prefWidth="162.0" text="Total: " textFill="WHITE">
+                           <font>
+                              <Font name="Dubai Medium" size="18.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="129.0" layoutY="254.0" mnemonicParsing="false" onMouseClicked="#buttonProceedClicked" text="Proceed">
+                           <font>
+                              <Font name="Dubai Medium" size="12.0" />
+                           </font>
+                        </Button>
+                        <Label fx:id="numberPlaces" layoutX="141.0" layoutY="119.0" prefHeight="17.0" prefWidth="88.0" textFill="WHITE">
+                           <font>
+                              <Font name="Dubai Light" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="total" layoutX="51.0" layoutY="224.0" prefHeight="17.0" prefWidth="88.0" textFill="WHITE">
+                           <font>
+                              <Font name="Dubai Light" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </right>
+               <bottom>
+                  <Pane prefHeight="278.0" prefWidth="1076.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <VBox fx:id="vBoxPaiement" layoutX="226.0" layoutY="14.0" prefHeight="226.0" prefWidth="537.0" />
+                     </children>
+                  </Pane>
+               </bottom>
+               <center>
+                  <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <CheckBox id="3" fx:id="checkbox3" layoutX="292.0" layoutY="165.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="4" fx:id="checkbox4" layoutX="309.0" layoutY="165.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="36" fx:id="checkbox36" layoutX="343.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="25" fx:id="checkbox25" layoutX="326.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="35" fx:id="checkbox35" layoutX="326.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="24" fx:id="checkbox24" layoutX="309.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="34" fx:id="checkbox34" layoutX="309.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="33" fx:id="checkbox33" layoutX="292.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="23" fx:id="checkbox23" layoutX="292.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="13" fx:id="checkbox13" layoutX="292.0" layoutY="183.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="14" fx:id="checkbox14" layoutX="309.0" layoutY="183.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="26" fx:id="checkbox26" layoutX="343.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="15" fx:id="checkbox15" layoutX="326.0" layoutY="183.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="16" fx:id="checkbox16" layoutX="343.0" layoutY="183.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="5" fx:id="checkbox5" layoutX="326.0" layoutY="165.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="6" fx:id="checkbox6" layoutX="343.0" layoutY="165.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="7" fx:id="checkbox7" layoutX="360.0" layoutY="165.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="17" fx:id="checkbox17" layoutX="360.0" layoutY="183.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="27" fx:id="checkbox27" layoutX="360.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="37" fx:id="checkbox37" layoutX="360.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="8" fx:id="checkbox8" layoutX="377.0" layoutY="165.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="18" fx:id="checkbox18" layoutX="377.0" layoutY="183.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="28" fx:id="checkbox28" layoutX="377.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="38" fx:id="checkbox38" layoutX="377.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="9" fx:id="checkbox9" layoutX="411.0" layoutY="165.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="19" fx:id="checkbox19" layoutX="411.0" layoutY="183.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="29" fx:id="checkbox29" layoutX="411.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="39" fx:id="checkbox39" layoutX="411.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="2" fx:id="checkbox2" layoutX="258.0" layoutY="165.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="12" fx:id="checkbox12" layoutX="258.0" layoutY="183.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="22" fx:id="checkbox22" layoutX="258.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="32" fx:id="checkbox32" layoutX="258.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="1" fx:id="checkbox1" layoutX="241.0" layoutY="165.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="11" fx:id="checkbox11" layoutX="241.0" layoutY="183.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="21" fx:id="checkbox21" layoutX="241.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="31" fx:id="checkbox31" layoutX="241.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="10" fx:id="checkbox10" layoutX="428.0" layoutY="165.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="20" fx:id="checkbox20" layoutX="428.0" layoutY="183.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="30" fx:id="checkbox30" layoutX="428.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="40" fx:id="checkbox40" layoutX="428.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="41" fx:id="checkbox41" layoutX="241.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="42" fx:id="checkbox42" layoutX="258.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="43" fx:id="checkbox43" layoutX="292.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="44" fx:id="checkbox44" layoutX="309.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="45" fx:id="checkbox45" layoutX="326.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="46" fx:id="checkbox46" layoutX="343.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="47" fx:id="checkbox47" layoutX="360.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="48" fx:id="checkbox48" layoutX="377.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="49" fx:id="checkbox49" layoutX="411.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <CheckBox id="50" fx:id="checkbox50" layoutX="428.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#handleCheckBoxSelection" />
+                        <Polygon fill="DODGERBLUE" layoutX="317.0" layoutY="125.0" points="-39.399993896484375, 7.199989318847656, 130.20001220703125, -33.599998474121094, -65.80001831054688, -33.599998474121094" stroke="BLACK" strokeType="INSIDE" />
+                        <Polygon fill="DODGERBLUE" layoutX="418.0" layoutY="144.0" points="-11.5999755859375, -12.800010681152344, 21.20001220703125, -52.599998474121094, -140.39999389648438, -12.800010681152344" stroke="DODGERBLUE" strokeType="INSIDE" />
+                        <Label layoutX="45.0" layoutY="296.0" text="You choosed seat(s) number: " textFill="WHITE">
+                           <font>
+                              <Font name="Dubai Medium" size="20.0" />
+                           </font>
+                        </Label>
+                        <Text fx:id="textChoice" fill="WHITE" layoutX="292.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="215.16207885742188">
+                           <font>
+                              <Font name="Dubai Light" size="17.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+               </center>
+            </BorderPane>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

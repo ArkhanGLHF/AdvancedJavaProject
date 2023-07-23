@@ -31,6 +31,7 @@ public class CinemaPerformanceLayout {
             //String cineName = cinePerf.getString("cinema_name");
             String startTime = cinePerf.getString("performance_start_time");
             String roomID = cinePerf.getString("room_id");
+            int performance_id = cinePerf.getInt("performance_id");
             ResultSet room = stat2.executeQuery("SELECT * FROM room WHERE room_id="+roomID);
             while (room.next()) {
                 System.out.println("cine next et room next");
@@ -39,7 +40,7 @@ public class CinemaPerformanceLayout {
                 AnchorPane cinemaPerf = fxmlLoader.load();
 
                 PerformanceLayout performanceLayout = fxmlLoader.getController();
-                performanceLayout.setDataPerfLayout(startTime,room.getString("room_number"));
+                performanceLayout.setDataPerfLayout(startTime,room.getString("room_number"), performance_id);
                 performanceCinema.getChildren().add(cinemaPerf);
 
             }
