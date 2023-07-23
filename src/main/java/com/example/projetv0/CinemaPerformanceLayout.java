@@ -12,10 +12,8 @@ import java.io.IOException;
 import java.sql.*;
 
 public class CinemaPerformanceLayout {
-
     @FXML
     private Label cinemaName;
-
     @FXML
     private HBox performanceCinema;
 

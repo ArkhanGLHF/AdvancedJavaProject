@@ -18,6 +18,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
 
+/**
+ * Main page for the members account management
+ */
 public class AccountManagementController {
     private int member_id;
     @FXML
@@ -32,12 +35,16 @@ public class AccountManagementController {
     private TextField txtPassword;
     @FXML
     private TextField txtURL;
+
+    /**
+     * Displaying the information of the connected account
+     */
     void manageAccount() throws SQLException {
         //connection to database
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
         Statement stat = con.createStatement();
 
-        //displaying every member
+        //displaying the information of the connected account
         ResultSet rs = stat.executeQuery("SELECT * FROM `member` WHERE member_isConnected=1");
         if(rs.next()){
             member_id = rs.getInt("member_id");
@@ -49,8 +56,13 @@ public class AccountManagementController {
             profileImage.setImage(image);
         }
     }
+
+    /**
+     * Function to delete your account
+     */
     @FXML
-    void deleteAccount(ActionEvent event) throws SQLException, IOException {
+    void deleteAccount(ActionEvent event) {
+        //Create a verification alert before deleting an account
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Deleting account");
         alert.setHeaderText(null);
@@ -60,14 +72,17 @@ public class AccountManagementController {
         Button cancelButton = (Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL);
         cancelButton.setText("Cancel");
         alert.showAndWait().ifPresent(response -> {
+            //if we confirm
             if (response == ButtonType.OK) {
-                //connection to database
                 Connection con;
                 try {
+                    //connection to database
                     con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
                     Statement stat = con.createStatement();
+                    //deleting account
                     String sql = "DELETE FROM `member` WHERE member_id = " + member_id;
                     stat.executeUpdate(sql);
+                    //loading home page
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("hello-view.fxml"));
                     Parent root = fxmlLoader.load();
@@ -84,8 +99,13 @@ public class AccountManagementController {
             }
         });
     }
+
+    /**
+     * Function to edit the information of your account
+     */
     @FXML
     void editAccount(ActionEvent event) throws SQLException, IOException {
+        //getting the new values
         boolean flag = false;
         String name = txtName.getText();
         String mail = txtMail.getText();
@@ -113,7 +133,8 @@ public class AccountManagementController {
         String sql = "SELECT * FROM member";
         PreparedStatement statement = con.prepareStatement(sql);
         ResultSet rs = statement.executeQuery();
-        while (rs.next()){ //if the mail is found in the database and by another member
+        //if the mail is found in the database and by another member, flag
+        while (rs.next()){
             if(rs.getString("member_mail").equals(mail) && rs.getInt("member_id")!= member_id){
                 txtError.setText("Error: Mail already used by another member");
                 flag = true;
@@ -121,10 +142,11 @@ public class AccountManagementController {
             }
         }
 
+        //if an error has been found, we display the error
         if(flag){
             txtError.setVisible(true);
         } else{
-            //connection to database
+            //else we update the information
             sql = "UPDATE member SET member_name=?, member_mail=?, member_password=?, member_url=? WHERE member_id=" + member_id;
             statement = con.prepareStatement(sql);
             statement.setString(1, name);

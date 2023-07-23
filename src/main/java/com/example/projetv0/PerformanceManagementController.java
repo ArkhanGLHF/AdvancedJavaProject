@@ -1,4 +1,5 @@
 package com.example.projetv0;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,10 +9,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-
 import java.io.IOException;
 import java.sql.*;
 
+/**
+ * Main page of the performance management page for the admin, displaying every performance and functions to add/delete/edit
+ */
 public class PerformanceManagementController {
     @FXML
     private VBox PerformancePresentationLayout;
@@ -30,7 +33,11 @@ public class PerformanceManagementController {
     @FXML
     private Text txtError;
 
+    /**
+     * Function to display every performance in the database
+     */
     void managePerformance() throws SQLException, IOException {
+        //resetting every box
         nameBox.getItems().clear();
         cinemaBox.getItems().clear();
         roomBox.getItems().clear();
@@ -42,7 +49,7 @@ public class PerformanceManagementController {
         //connection to database
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
         Statement stat = con.createStatement();
-        //filling the movies
+        //filling the combo-boxes
         ResultSet rs = stat.executeQuery("SELECT * FROM `movie`");
         while(rs.next()){
             String movieName = rs.getString("movie_name");
@@ -53,6 +60,7 @@ public class PerformanceManagementController {
             String cinemaName = rs.getString("cinema_name");
             cinemaBox.getItems().add(cinemaName);
         }
+        //display every performance
         rs = stat.executeQuery("SELECT * FROM `performance` ORDER BY `movie_id` ASC");
         while (rs.next()) {
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -64,8 +72,13 @@ public class PerformanceManagementController {
             PerformancePresentationLayout.getChildren().add(box);
         }
     }
+
+    /**
+     * Function to add a performance in the database
+     */
     @FXML
     void addPerformance(ActionEvent event) throws SQLException, IOException {
+        //getting the values from the fields
         boolean flag = false;
         String name = nameBox.getSelectionModel().getSelectedItem();
         String cinema = cinemaBox.getSelectionModel().getSelectedItem();
@@ -73,7 +86,7 @@ public class PerformanceManagementController {
         String date = dateTxt.getText();
         String startTime = hourTxt.getText();
 
-        //checking if texts are null
+        //checking if every value has been entered
         if(nameBox.getValue()==null){
             txtError.setText("Error: Movie cannot be null");
             flag = true;
@@ -91,8 +104,6 @@ public class PerformanceManagementController {
             flag = true;
         }
 
-        //checking if there is already a performance in this room at this start time
-        //connection to database
         int cinemaID = -1;
         int roomID=-1;
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
@@ -123,7 +134,8 @@ public class PerformanceManagementController {
         //if we had an error, display it
         if(flag){
             txtError.setVisible(true);
-        } else { //else add the new performance in the database
+        } else {
+            //else add the new performance in the database
             int movieID=-1;
             sql = "SELECT * FROM `movie` WHERE movie_name="+'"'+name+'"';
             rs = statement.executeQuery(sql);
@@ -139,20 +151,24 @@ public class PerformanceManagementController {
             s.setInt(5, Integer.parseInt(startTime));
             s.executeUpdate();
 
+            //clearing and displaying the updated performance management page
             PerformancePresentationLayout.getChildren().clear();
             managePerformance();
         }
-
-
     }
+
+    /**
+     * Function to edit the room ComboBox with the cinema rooms
+     */
     @FXML
     void cinemaChoice(ActionEvent event) throws SQLException {
+        //when a cinema has been chosed
         int cinemaID = -1;
         roomBox.setDisable(false);
         roomBox.getItems().clear();
         String cinemaName = cinemaBox.getSelectionModel().getSelectedItem();
 
-        //connection to database
+        //get the cinema id
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
         Statement stat = con.createStatement();
         String sql = "SELECT * FROM `cinema` WHERE cinema_name="+'"'+cinemaName+'"';
@@ -161,6 +177,7 @@ public class PerformanceManagementController {
             cinemaID=rs.getInt("cinema_id");
             System.out.println(cinemaID);
         }
+        //fill the combo-box with the rooms of the cinema chosen
         sql = "SELECT * FROM `room` WHERE cinema_id="+cinemaID;
         rs = stat.executeQuery(sql);
         while (rs.next()){

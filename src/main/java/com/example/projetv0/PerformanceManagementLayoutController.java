@@ -1,4 +1,5 @@
 package com.example.projetv0;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,10 +15,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.*;
 
+/**
+ * Page of a performance individually, displayed in the performance management page of the admin
+ */
 public class PerformanceManagementLayoutController {
     @FXML
     private Text cinemaTxt;
@@ -57,7 +60,12 @@ public class PerformanceManagementLayoutController {
     String d;
     String startT;
     int performance_id;
+
+    /**
+     * Function to set the data of the performance
+     */
     void setData(int movieId, int cinemaId, int roomId, String date, int hour, int perf_id) throws SQLException {
+        //getting the data sent
         movie_id = movieId;
         cinema_id = cinemaId;
         room_id = roomId;
@@ -89,8 +97,13 @@ public class PerformanceManagementLayoutController {
         hourTxt.setText("Start Time: "+String.valueOf(hour));
         startT = String.valueOf(hour);
     }
+
+    /**
+     * Function to display the edit performance for the performance
+     */
     @FXML
-    void editPerformance(ActionEvent event) throws SQLException {
+    void editPerformance() throws SQLException {
+        //hiding the text
         movieNameLbl.setVisible(false);
         cinemaTxt.setVisible(false);
         dateTxt.setVisible(false);
@@ -99,6 +112,7 @@ public class PerformanceManagementLayoutController {
         editButton.setVisible(false);
         removeButton.setVisible(false);
 
+        //displaying edit boxes and fields
         comboMovie.setVisible(true);
         comboMovie.setValue(movieNameLbl.getText());
         comboRoom.setVisible(true);
@@ -120,19 +134,25 @@ public class PerformanceManagementLayoutController {
             String movieName = rs.getString("movie_name");
             comboMovie.getItems().add(movieName);
         }
+        //fillinf the cinemas
         rs = stat.executeQuery("SELECT * FROM `cinema`");
         while(rs.next()){
             String cinemaName = rs.getString("cinema_name");
             comboCine.getItems().add(cinemaName);
         }
+        //filling the cinema's rooms
         rs = stat.executeQuery("SELECT * FROM `room` WHERE cinema_id="+cinema_id);
         while(rs.next()){
             String room = rs.getString("room_number");
             comboRoom.getItems().add(room);
         }
     }
+    /**
+     * Function to edit the room ComboBox with the cinema rooms
+     */
     @FXML
-    void cinemaChoice(ActionEvent event) throws SQLException {
+    void cinemaChoice() throws SQLException {
+        //when a cinema is chosen
         int cinemaID = -1;
         comboRoom.getItems().clear();
         String cinemaName = comboCine.getSelectionModel().getSelectedItem();
@@ -140,11 +160,13 @@ public class PerformanceManagementLayoutController {
         //connection to database
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
         Statement stat = con.createStatement();
+        //getting the cinema id
         String sql = "SELECT * FROM `cinema` WHERE cinema_name="+'"'+cinemaName+'"';
         ResultSet rs = stat.executeQuery(sql);
         if(rs.next()){
             cinemaID=rs.getInt("cinema_id");
         }
+        //filling the cinema's rooms
         sql = "SELECT * FROM `room` WHERE cinema_id="+cinemaID;
         rs = stat.executeQuery(sql);
         while (rs.next()){
@@ -152,14 +174,20 @@ public class PerformanceManagementLayoutController {
             comboRoom.getItems().add(String.valueOf(roomNum));
         }
     }
+
+    /**
+     * Function to remove a performance from the database
+     */
     @FXML
     void removePerformance(ActionEvent event) throws SQLException, IOException {
         //connection to database
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
         Statement stat = con.createStatement();
+        //deleting the performance from the database
         String sql = "DELETE FROM `performance` WHERE movie_id = " + movie_id;
         stat.executeUpdate(sql);
 
+        //reloading the management page
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("hello-view.fxml"));
         Parent root = fxmlLoader.load();
@@ -171,8 +199,13 @@ public class PerformanceManagementLayoutController {
         lstage.setScene(scene);
         lstage.show();
     }
+
+    /**
+     * Function to send the edited information to the database
+     */
     @FXML
     void submitEdit(ActionEvent event) throws SQLException, IOException {
+        //get all values chosen
         boolean flag = false;
         String name = comboMovie.getSelectionModel().getSelectedItem();
         String cine = comboCine.getSelectionModel().getSelectedItem();

@@ -12,12 +12,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.*;
 
+/**
+ * Page of a movie individually, displayed in the movie management page of the admin
+ */
 public class MovieManagementLayoutController {
-
     private int movie_id;
     @FXML
     private Text GenreTxt;
@@ -49,7 +50,12 @@ public class MovieManagementLayoutController {
     private TextField txtURL;
     @FXML
     private Text txtError;
+
+    /**
+     * Function to set the data of the movie
+     */
     public void setData(String imageSrc, String name, String Genre, String Reviews, int movieId){
+        //setting the data received
         Image image = new Image(imageSrc);
         movieImage.setImage(image);
         movieNameLbl.setText(name);
@@ -57,14 +63,19 @@ public class MovieManagementLayoutController {
         GenreTxt.setText("Genre: "+Genre);
         movie_id = movieId;
     }
+
+    /**
+     * Function to display the edit boxes for the movie
+     */
     @FXML
-    void editMovie(ActionEvent event) throws SQLException {
+    void editMovie() throws SQLException {
         //connection to database
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
         Statement stat = con.createStatement();
         String sql = "SELECT * FROM `movie` WHERE movie_id=" + movie_id;
         ResultSet rs = stat.executeQuery(sql);
-        if(rs.next()) {//display edit boxes
+        if(rs.next()) {
+            //display edit boxes filled
             txtDate.setVisible(true);
             txtDate.setText(rs.getString("movie_date"));
             txtGenre.setVisible(true);
@@ -89,8 +100,13 @@ public class MovieManagementLayoutController {
             removeButton.setVisible(false);
         }
     }
+
+    /**
+     * Function to edit the movie information in the database
+    */
     @FXML
     void submitEdit(ActionEvent event) throws SQLException, IOException {
+        //getting the values from the text-fields
         boolean flag = false;
         String name = txtName.getText();
         String genre = txtGenre.getText();
@@ -141,15 +157,18 @@ public class MovieManagementLayoutController {
             }
         }
 
+        //if we had an error, display it
         if(flag){
             txtError.setVisible(true);
         } else{
+            //casting the values
             int length = Integer.parseInt(txtLength.getText());
             int release = Integer.parseInt(txtDate.getText());
             float review = Float.parseFloat(txtReview.getText());
 
             //connection to database
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
+            //updating movie in database
             String sql = "UPDATE movie SET movie_name=?, movie_genre=?, movie_length=?, movie_date=?, movie_review=?, movie_url=? WHERE movie_id=" + movie_id;
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, name);
@@ -173,14 +192,20 @@ public class MovieManagementLayoutController {
             lstage.show();
         }
     }
+
+    /**
+     * Function to delete a movie from the database
+     */
     @FXML
     void removeMovie(ActionEvent event) throws SQLException, IOException {
         //connection to database
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
         Statement stat = con.createStatement();
+        //deleting movie from database
         String sql = "DELETE FROM `movie` WHERE movie_id = " + movie_id;
         stat.executeUpdate(sql);
 
+        //reloading account management page
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("hello-view.fxml"));
         Parent root = fxmlLoader.load();
@@ -192,7 +217,5 @@ public class MovieManagementLayoutController {
         lstage.setScene(scene);
         lstage.show();
     }
-
-
 }
 

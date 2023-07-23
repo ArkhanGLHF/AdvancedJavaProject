@@ -9,10 +9,12 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.*;
 
+/**
+ * Page displaying the actions available for an account
+ */
 public class ProfileController {
     @FXML
     private BorderPane bPane;
@@ -25,20 +27,31 @@ public class ProfileController {
     @FXML
     private Label action3Lbl;
     private boolean isAdmin;
+
+    /**
+     * Setting up the page with the different actions
+     */
     void setAction(boolean a, String n){
+        //setting the values of the label if the user is an admin or not
         isAdmin = a;
         profileNameLbl.setText(n);
         if(a){
+            //if is admin
             action3Lbl.setVisible(true);
             action1Lbl.setText("MOVIES");
             action2Lbl.setText("PERFORMANCES");
             action3Lbl.setText("MEMBERS");
         }else{
+            //if is member
             action1Lbl.setText("SEE TICKETS");
             action2Lbl.setText("MANAGE ACCOUNT");
             action3Lbl.setVisible(false);
         }
     }
+
+    /**
+     * Function to log out from account
+     */
     @FXML
     void logout(MouseEvent event) throws SQLException, IOException {
         //connection to database
@@ -65,6 +78,8 @@ public class ProfileController {
                 statement.executeUpdate();
             }
         }
+
+        //reloading home page
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("hello-view.fxml"));
         Parent root = fxmlLoader.load();
@@ -76,8 +91,12 @@ public class ProfileController {
         lstage.setScene(scene);
         lstage.show();
     }
+
+    /**
+     * Function to manage movies or see tickets
+     */
     @FXML
-    void action1clicked(MouseEvent event) throws SQLException, IOException {
+    void action1clicked() throws SQLException, IOException {
         FXMLLoader loader;
         //if admin, manage movies
         if(isAdmin){
@@ -88,12 +107,19 @@ public class ProfileController {
             bPane.setCenter(managementPane);
         }
         else{ //if member, see reservations
-
+            loader = new FXMLLoader(HelloApplication.class.getResource("seeTicket.fxml"));
+            Pane managementPane = loader.load();
+            SeeTicketController stc = loader.getController();
+            stc.seeTicket();
+            bPane.setCenter(managementPane);
         }
     }
 
+    /**
+     * Function to manage performance or edit the member account
+     */
     @FXML
-    void action2clicked(MouseEvent event) throws IOException, SQLException {
+    void action2clicked() throws IOException, SQLException {
         FXMLLoader loader;
         if(isAdmin){
             //manage every performance
@@ -112,24 +138,19 @@ public class ProfileController {
         }
     }
 
+    /**
+     * Function to manage every member
+     */
     @FXML
-    void action3clicked(MouseEvent event) throws IOException, SQLException {
+    void action3clicked() throws IOException, SQLException {
         FXMLLoader loader;
         if(isAdmin){
+            //manage every member
             loader = new FXMLLoader(HelloApplication.class.getResource("memberManagement.fxml"));
             Pane managementPane = loader.load();
             MemberManagementController mmc = loader.getController();
             mmc.memberManagement();
             bPane.setCenter(managementPane);
         }
-        else{
-
-        }
     }
-
-    @FXML
-    void action4clicked(MouseEvent event) {
-
-    }
-
 }
