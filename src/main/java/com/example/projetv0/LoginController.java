@@ -7,7 +7,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -105,8 +104,7 @@ public class LoginController {
             Parent root = fxmlLoader.load();
             Stage lstage = (Stage) ((Node) (event.getSource())).getScene().getWindow();
             HelloController hc = fxmlLoader.getController();
-            MouseEvent e = null;
-            hc.accountManagement(e);
+            hc.accountManagement();
             Scene scene = new Scene(root);
             lstage.setScene(scene);
             lstage.show();
@@ -170,8 +168,7 @@ public class LoginController {
             Parent root = fxmlLoader.load();
             Stage lstage = (Stage) ((Node) (event.getSource())).getScene().getWindow();
             HelloController hc = fxmlLoader.getController();
-            MouseEvent e = null;
-            hc.home(e);
+            hc.home();
             Scene scene = new Scene(root);
             lstage.setScene(scene);
             lstage.show();

@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -185,8 +184,7 @@ public class MovieManagementLayoutController {
             Parent root = fxmlLoader.load();
             Stage lstage = (Stage) ((Node) (event.getSource())).getScene().getWindow();
             HelloController hc = fxmlLoader.getController();
-            MouseEvent e = null;
-            hc.accountManagement(e);
+            hc.accountManagement();
             Scene scene = new Scene(root);
             lstage.setScene(scene);
             lstage.show();
@@ -211,8 +209,7 @@ public class MovieManagementLayoutController {
         Parent root = fxmlLoader.load();
         Stage lstage = (Stage) ((Node) (event.getSource())).getScene().getWindow();
         HelloController hc = fxmlLoader.getController();
-        MouseEvent e = null;
-        hc.accountManagement(e);
+        hc.accountManagement();
         Scene scene = new Scene(root);
         lstage.setScene(scene);
         lstage.show();

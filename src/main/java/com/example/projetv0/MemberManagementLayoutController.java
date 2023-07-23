@@ -12,7 +12,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -111,8 +110,7 @@ public class MemberManagementLayoutController {
         Parent root = fxmlLoader.load();
         Stage lstage = (Stage) ((Node) (event.getSource())).getScene().getWindow();
         HelloController hc = fxmlLoader.getController();
-        MouseEvent e = null;
-        hc.accountManagement(e);
+        hc.accountManagement();
         Scene scene = new Scene(root);
         lstage.setScene(scene);
         lstage.show();
@@ -178,8 +176,7 @@ public class MemberManagementLayoutController {
             Parent root = fxmlLoader.load();
             Stage lstage = (Stage) ((Node) (event.getSource())).getScene().getWindow();
             HelloController hc = fxmlLoader.getController();
-            MouseEvent e = null;
-            hc.accountManagement(e);
+            hc.accountManagement();
             Scene scene = new Scene(root);
             lstage.setScene(scene);
             lstage.show();

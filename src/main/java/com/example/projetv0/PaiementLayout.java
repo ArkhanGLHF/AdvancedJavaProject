@@ -3,11 +3,7 @@ package com.example.projetv0;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.CheckBox;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-
 import java.io.IOException;
 import java.sql.*;
 
@@ -28,8 +24,6 @@ public class PaiementLayout {
         //connection to database
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
         Statement stat = con.createStatement();
-        Statement stat1 = con.createStatement();
-        Statement stat2 = con.createStatement();
 
         String id_room = null;
         String id_cinema = null;
@@ -59,7 +53,7 @@ public class PaiementLayout {
                 if (rowsAffected > 0) {
                     System.out.println("Ticket inserted successfully.");
                     HelloController helloController = HelloController.getInstance();
-                    helloController.startPage();
+                    helloController.home();
                 } else {
                     System.out.println("Error inserting ticket.");
                 }

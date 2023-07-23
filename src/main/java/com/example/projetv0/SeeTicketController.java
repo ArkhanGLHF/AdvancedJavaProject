@@ -3,7 +3,6 @@ package com.example.projetv0;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -15,8 +14,6 @@ import java.sql.*;
 public class SeeTicketController {
     @FXML
     private VBox TicketsLayout;
-    @FXML
-    private Pane memberManagementPane;
     int member_id;
 
     /**

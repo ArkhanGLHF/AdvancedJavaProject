@@ -85,8 +85,7 @@ public class ProfileController {
         Parent root = fxmlLoader.load();
         Stage lstage = (Stage) ((Node) (event.getSource())).getScene().getWindow();
         HelloController hc = fxmlLoader.getController();
-        MouseEvent e = null;
-        hc.home(e);
+        hc.home();
         Scene scene = new Scene(root);
         lstage.setScene(scene);
         lstage.show();

@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -39,7 +38,7 @@ public class SeeTicketLayoutController {
     public void setData(int ticketID, int performanceID, int roomID, int cinemaID, int seatNumber) throws SQLException {
         //setting the data
         ticket_id = ticketID;
-        seatTxt.setText("Seat: " + String.valueOf(seatNumber));
+        seatTxt.setText("Seat: " + seatNumber);
         int movieID = -1;
         //connection to database
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
@@ -82,8 +81,7 @@ public class SeeTicketLayoutController {
         Parent root = fxmlLoader.load();
         Stage lstage = (Stage) ((Node) (event.getSource())).getScene().getWindow();
         HelloController hc = fxmlLoader.getController();
-        MouseEvent e = null;
-        hc.accountManagement(e);
+        hc.accountManagement();
         Scene scene = new Scene(root);
         lstage.setScene(scene);
         lstage.show();

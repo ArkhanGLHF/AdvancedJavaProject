@@ -3,11 +3,13 @@ package com.example.projetv0;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import java.io.IOException;
 import java.sql.*;
 
+/**
+ * Main Controller, with home page
+ */
 public class HelloController {
     @FXML
     private VBox moviePresentationLayout;
@@ -23,14 +25,26 @@ public class HelloController {
     private boolean isAdmin = false;
     private String profileName = "";
     private static HelloController instance; // Variable pour stocker la référence du contrôleur principal
+
+    /**
+     * Constructor of HelloController
+     */
     public HelloController() {
         instance = this;
     }
+
+    /**
+     * Function to get the HelloController and use its function from another class
+     */
     public static HelloController getInstance() {
         return instance;
     }
+
+    /**
+     * Function to filter movies by name
+     */
     @FXML
-    void nameFilter(MouseEvent event) throws SQLException, IOException {
+    void nameFilter() throws SQLException, IOException {
         //clearing pane
         moviePresentationLayout.getChildren().clear();
 
@@ -58,8 +72,12 @@ public class HelloController {
         }
 
     }
+
+    /**
+     * Function to filter movies by genre
+     */
     @FXML
-    void genreFilter(MouseEvent event) throws SQLException, IOException {
+    void genreFilter() throws SQLException, IOException {
         //clearing pane
         moviePresentationLayout.getChildren().clear();
 
@@ -87,8 +105,12 @@ public class HelloController {
 
         }
     }
+
+    /**
+     * Function to filter movies by release date (ASC)
+     */
     @FXML
-    void releaseDateFilter(MouseEvent event) throws SQLException, IOException {
+    void releaseDateFilter() throws SQLException, IOException {
         //clearing pane
         moviePresentationLayout.getChildren().clear();
 
@@ -116,8 +138,12 @@ public class HelloController {
 
         }
     }
+
+    /**
+     * Function to filter movies by reviews
+     */
     @FXML
-    void reviewsFilter(MouseEvent event) throws SQLException, IOException {
+    void reviewsFilter() throws SQLException, IOException {
         //clearing pane
         moviePresentationLayout.getChildren().clear();
         //connection to database
@@ -142,6 +168,10 @@ public class HelloController {
             moviePresentationLayout.getChildren().add(filmbox);
         }
     }
+
+    /**
+     * Initialisation of home page
+     */
     void startPage() throws SQLException, IOException {
         //checking session
         if(!isConnected().equals("")){
@@ -167,8 +197,12 @@ public class HelloController {
             moviePresentationLayout.getChildren().add(filmbox);
         }
     }
+
+    /**
+     * Function to display the account management page (login/create/actions)
+     */
     @FXML
-    void accountManagement(MouseEvent event) throws IOException, SQLException {
+    void accountManagement() throws IOException, SQLException {
         isInHomePage = false;
 
         //if not connected, login
@@ -185,10 +219,13 @@ public class HelloController {
         }
         bPane.setCenter(null);
         bPane.setCenter(accountPane);
-
     }
+
+    /**
+     * Function to display the home page
+     */
     @FXML
-    void home(MouseEvent event) throws SQLException, IOException {
+    void home() throws SQLException, IOException {
         isInHomePage = true;
         //clearing pane
         bPane.setCenter(null);
@@ -201,8 +238,12 @@ public class HelloController {
         //displaying
         bPane.setCenter(centerPane);
     }
+
+    /**
+     * Function to display every movie in the database
+     */
     @FXML
-    void browseMovies(MouseEvent event) throws SQLException, IOException {
+    void browseMovies() throws SQLException, IOException {
         isInHomePage = false;
         //clearing pane
         bPane.setCenter(null);
@@ -229,10 +270,10 @@ public class HelloController {
         //displaying
         bPane.setCenter(centerPane);
     }
-    @FXML
-    void browseCinemas(MouseEvent event) {
-        isInHomePage = false;
-    }
+
+    /**
+     * Function to check if someone is connected and return his name
+     */
     String isConnected() throws SQLException {
         //connection to database
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/omnesflix?useSSL=FALSE", "root", "");
@@ -259,11 +300,7 @@ public class HelloController {
 
     /**
      * Redirect us on the booking page of a movie we clicked on
-     * @param movie_id
-     * @throws SQLException
-     * @throws IOException
      */
-
     void bookingPage(int movie_id) throws SQLException, IOException {
         bPane.setCenter(null);
         moviePresentationLayout.getChildren().clear();
@@ -293,6 +330,9 @@ public class HelloController {
 
     }
 
+    /**
+     * Redirect us to the seat reservation page
+     */
     void seatsReservation(int performance_id) throws SQLException, IOException {
         bPane.setCenter(null);
         moviePresentationLayout.getChildren().clear();

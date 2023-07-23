@@ -1,12 +1,10 @@
 package com.example.projetv0;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import java.io.IOException;
@@ -24,8 +22,6 @@ public class PerformanceManagementController {
     private TextField dateTxt;
     @FXML
     private TextField hourTxt;
-    @FXML
-    private Pane memberManagementPane;
     @FXML
     private ComboBox<String> nameBox;
     @FXML
@@ -77,7 +73,7 @@ public class PerformanceManagementController {
      * Function to add a performance in the database
      */
     @FXML
-    void addPerformance(ActionEvent event) throws SQLException, IOException {
+    void addPerformance() throws SQLException, IOException {
         //getting the values from the fields
         boolean flag = false;
         String name = nameBox.getSelectionModel().getSelectedItem();
@@ -161,7 +157,7 @@ public class PerformanceManagementController {
      * Function to edit the room ComboBox with the cinema rooms
      */
     @FXML
-    void cinemaChoice(ActionEvent event) throws SQLException {
+    void cinemaChoice() throws SQLException {
         //when a cinema has been chosed
         int cinemaID = -1;
         roomBox.setDisable(false);

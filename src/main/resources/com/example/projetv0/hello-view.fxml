@@ -12,7 +12,7 @@
 
 <BorderPane fx:id="bPane" prefHeight="660.0" prefWidth="1276.0" style="-fx-background-color: #2b2b2b;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetv0.HelloController">
     <top>
-        <Pane fx:id="topPane" prefHeight="71.0" prefWidth="1276.0" BorderPane.alignment="CENTER">
+        <Pane prefHeight="71.0" prefWidth="1276.0" BorderPane.alignment="CENTER">
             <children>
                 <Label layoutX="227.0" layoutY="13.0" onMouseClicked="#home" prefHeight="48.0" prefWidth="117.0" text="HOME     |" textFill="WHITE">
                     <font>
@@ -20,11 +20,6 @@
                     </font>
                 </Label>
                 <Label layoutX="355.0" layoutY="12.0" onMouseClicked="#browseMovies" prefHeight="48.0" prefWidth="145.0" text="MOVIES     |" textFill="WHITE">
-                    <font>
-                        <Font name="Dubai Medium" size="27.0" />
-                    </font>
-                </Label>
-                <Label alignment="CENTER" layoutX="511.0" layoutY="13.0" onMouseClicked="#browseCinemas" prefHeight="48.0" prefWidth="158.0" text="CINEMAS     |" textFill="WHITE">
                     <font>
                         <Font name="Dubai Medium" size="27.0" />
                     </font>
@@ -44,7 +39,7 @@
         </Pane>
     </top>
     <left>
-        <Pane fx:id="leftPane" prefHeight="589.0" prefWidth="163.0" style="-fx-background-color: #1a1a1a;" BorderPane.alignment="CENTER">
+        <Pane prefHeight="589.0" prefWidth="163.0" style="-fx-background-color: #1a1a1a;" BorderPane.alignment="CENTER">
             <children>
                 <Label alignment="CENTER" layoutX="41.0" prefHeight="44.0" prefWidth="83.0" text="Filters" textFill="WHITE">
                     <font>

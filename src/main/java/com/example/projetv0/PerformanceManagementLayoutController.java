@@ -12,7 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -94,7 +93,7 @@ public class PerformanceManagementLayoutController {
         }
         dateTxt.setText("Date: "+date);
         d = date;
-        hourTxt.setText("Start Time: "+String.valueOf(hour));
+        hourTxt.setText("Start Time: "+hour);
         startT = String.valueOf(hour);
     }
 
@@ -193,8 +192,7 @@ public class PerformanceManagementLayoutController {
         Parent root = fxmlLoader.load();
         Stage lstage = (Stage) ((Node) (event.getSource())).getScene().getWindow();
         HelloController hc = fxmlLoader.getController();
-        MouseEvent e = null;
-        hc.accountManagement(e);
+        hc.accountManagement();
         Scene scene = new Scene(root);
         lstage.setScene(scene);
         lstage.show();
@@ -284,8 +282,7 @@ public class PerformanceManagementLayoutController {
             Parent root = fxmlLoader.load();
             Stage lstage = (Stage) ((Node) (event.getSource())).getScene().getWindow();
             HelloController hc = fxmlLoader.getController();
-            MouseEvent e = null;
-            hc.accountManagement(e);
+            hc.accountManagement();
             Scene scene = new Scene(root);
             lstage.setScene(scene);
             lstage.show();

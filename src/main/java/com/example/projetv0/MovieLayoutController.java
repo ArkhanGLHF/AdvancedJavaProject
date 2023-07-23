@@ -1,17 +1,10 @@
 package com.example.projetv0;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseDragEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -70,13 +63,6 @@ public class MovieLayoutController {
 
     /**
      * Set all the data we need to display
-     * @param imageSrc
-     * @param name
-     * @param Synopsis
-     * @param Genre
-     * @param Reviews
-     * @param Release
-     * @param movieId
      */
     public void setData(String imageSrc, String name, String Synopsis, String Genre, String Reviews, String Release, int movieId){
         Image image = new Image(imageSrc);
